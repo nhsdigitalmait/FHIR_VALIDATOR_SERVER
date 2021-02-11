@@ -1,0 +1,9 @@
+/all_evidence/**
+/certs/**
+/logs/**
+/messages_for_validation/**
+/simulator_saved_messages/**
+/tranmitter_sent_messages/**
+/transmitter_source/**
+/validator_reports/**
+push_fhir_validator_to_dockerhub.sh

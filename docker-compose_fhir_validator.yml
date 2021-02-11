@@ -1,0 +1,9 @@
+version: '2.0'
+services:
+    tkw_uec_provider_simulator:
+        ports:
+            - '4435:4849'
+        volumes:
+            - '${HOME}/Scratch/data:/home/service/data'
+            - '${HOME}/Technical_Specialist_Folder/fhir/Assets/NHSD.Assets.STU3_1.4.0/node_modules/NHSD.Assets.STU3:/home/service/fhir'
+        image: 'nhsdigitalmait/fhir_validator_config:20210211'

@@ -1,0 +1,7 @@
+<OperationOutcome xmlns="http://hl7.org/fhir">
+    <issue>
+        <severity value="error" />
+        <code value="processing" />
+        <diagnostics value="Currently this server only supports $validate requests using POST"/>
+    </issue>
+</OperationOutcome>
