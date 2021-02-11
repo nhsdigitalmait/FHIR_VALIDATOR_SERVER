@@ -2,11 +2,11 @@
 #  FHIR VALIDATOR SERVER
 #
 BEGIN RESPONSES
-operation_outcome_empty_content_400 /home/riro/TKW-5.0.5/TKW/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_no_body_content.xml 400
-operation_outcome_invalid_content_type_415 /home/riro/TKW-5.0.5/TKW/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_invalid_content_type.xml 415
-operation_outcome_invalid_accept_415 /home/riro/TKW-5.0.5/TKW/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_no_accept.xml 415
-operation_outcome_unsupported_verb_404 /home/riro/TKW-5.0.5/TKW/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_unsupported_verb.xml 404
-operation_outcome_other_requests_404 /home/riro/TKW-5.0.5/TKW/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_all_other_requests.xml 404
+operation_outcome_empty_content_400 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_no_body_content.xml 400
+operation_outcome_invalid_content_type_415 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_invalid_content_type.xml 415
+operation_outcome_invalid_accept_415 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_no_accept.xml 415
+operation_outcome_unsupported_verb_404 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_unsupported_verb.xml 404
+operation_outcome_other_requests_404 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_all_other_requests.xml 404
 inlineValidator	class:uk.nhs.digital.mait.tkwx.tk.internalservices.rules.routingactor.FHIRITKInlineValidator	"200 OK"
 rebuild	class:uk.nhs.digital.mait.tkwx.tk.internalservices.rules.routingactor.HAPIFHIRRebuild	"200 OK"
 do_process	NONE	0
