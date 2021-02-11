@@ -1,6 +1,6 @@
 version: '2.0'
 services:
-    tkw_uec_provider_simulator:
+    fhir_validator_config:
         ports:
             - '4435:4849'
         volumes:
