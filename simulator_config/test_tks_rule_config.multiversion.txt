@@ -1,0 +1,95 @@
+# Simulator rule definition file for ITK Testbench
+#  FHIR VALIDATOR SERVER
+#
+BEGIN RESPONSES
+operation_outcome_empty_content_400 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_no_body_content.xml 400
+operation_outcome_invalid_content_type_415 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_invalid_content_type.xml 415
+operation_outcome_invalid_accept_415 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_no_accept.xml 415
+operation_outcome_unsupported_verb_404 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_unsupported_verb.xml 404
+operation_outcome_other_requests_404 TKW_ROOT/config/FHIR_VALIDATOR_SERVER/simulator_config/operation_outcomes/operation_outcome_all_other_requests.xml 404
+inlineValidator_STU3	class:uk.nhs.digital.mait.tkwx.tk.internalservices.rules.routingactor.FHIRITKInlineValidator?param=stu3		"200 OK"
+rebuild_STU3			class:uk.nhs.digital.mait.tkwx.tk.internalservices.rules.routingactor.HAPIFHIRRebuild?param=stu3	"200 OK"
+inlineValidator_R4		class:uk.nhs.digital.mait.tkwx.tk.internalservices.rules.routingactor.FHIRITKInlineValidator?param=r4		"200 OK"
+rebuild_R4				class:uk.nhs.digital.mait.tkwx.tk.internalservices.rules.routingactor.HAPIFHIRRebuild?param=r4	"200 OK"
+do_process	NONE	0
+END RESPONSES
+
+BEGIN SUBSTITUTIONS
+__MESSAGEID__	UUID
+__TIMESTAMP__	ISO8601datetime
+__JOBID__	UUID
+__ERRORID__	UUID
+__ERRORCODE__ Literal INVALID_PARAMETER
+__SERVER__ Literal NHS Digital TKW Server
+__PATIENT_1__ Literal 9658218865
+__PATIENT_2__ Literal 9658218873
+END SUBSTITUTIONS
+
+# all the "match/contains" rules apply to the content by default to use eg the context path it must be specified as context_path
+BEGIN EXPRESSIONS
+#
+EMPTY_CONTENT matches ^$
+# must be before parameters check since coversion from json wont happen if content-type is wrong
+INVALID_CONTENT_TYPE http_header content-type matches ^.*(text.*|application\/[a-z]+[^+]*)$
+#
+#  http header checks
+#
+EMPTY_ACCEPT http_header accept notmatches ^.+$
+INVALID_ACCEPT http_header accept notmatches ^.*application\/fhir\+(xml|json).*$
+#
+VALIDATESTU3	context_path matches ^.*/STU3/\$validate$
+VALIDATER4		context_path matches ^.*/R4/\$validate$
+VALIDATE		context_path matches ^.*/\$validate$
+#
+REBUILDSTU3	context_path matches ^.*/STU3/\$rebuild$
+REBUILDR4	context_path matches ^.*/R4/\$rebuild$
+REBUILD	context_path matches ^.*/\$rebuild$
+#
+passthrough	Always
+dontpassthrough	Never
+#
+END EXPRESSIONS
+
+
+BEGIN RULE
+POST
+if not EMPTY_ACCEPT and INVALID_ACCEPT then operation_outcome_invalid_accept_415
+if INVALID_CONTENT_TYPE then operation_outcome_invalid_content_type_415
+if EMPTY_CONTENT then operation_outcome_empty_content_400
+IF VALIDATESTU3 then inlineValidator_STU3
+IF VALIDATER4 then inlineValidator_R4
+#IF VALIDATE then inlineValidator_STU3
+if passthrough then operation_outcome_other_requests_404
+END RULE
+
+#=========================================================================================
+# Http methods no interactionid
+
+BEGIN RULE
+GET
+if passthrough then operation_outcome_unsupported_verb_404
+END RULE
+
+BEGIN RULE
+PUT
+IF REBUILDSTU3 then rebuild_STU3
+IF REBUILDR4 then rebuild_R4
+#IF REBUILD then rebuild_STU3
+if passthrough then operation_outcome_other_requests_404
+END RULE
+
+BEGIN RULE
+DELETE
+if passthrough then operation_outcome_unsupported_verb_404
+END RULE
+
+BEGIN RULE
+PATCH
+if passthrough then operation_outcome_unsupported_verb_404
+END RULE
+
+BEGIN RULE
+OPTIONS
+if passthrough then operation_outcome_unsupported_verb_404
+END RULE
+#=========================================================================================

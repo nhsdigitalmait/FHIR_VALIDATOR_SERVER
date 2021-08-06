@@ -8,7 +8,7 @@ echo "Making sure output structure is available"
 cd /home/service/data
 tar -xvf /home/service/TKW/config/FHIR_VALIDATOR_SERVER/tkwoutputstructure.tar
 cd /home/service
-javastring="-XX:+UseContainerSupport -XX:MaxRAMPercentage=80.0 -jar /home/service/TKW/TKW-x.jar -httpinterceptor /home/service/TKW/config/FHIR_VALIDATOR_SERVER/tkw-x.properties"
+javastring="-XX:+UseContainerSupport -XX:MaxRAMPercentage=80.0 -jar /home/service/TKW/TKW-x.jar -httpinterceptor /home/service/TKW/config/FHIR_VALIDATOR_SERVER/tkw-x.multiversion.properties"
 # decide whether its TLSMA or not
 if [ "$trustStore" == 'default' ]
 then

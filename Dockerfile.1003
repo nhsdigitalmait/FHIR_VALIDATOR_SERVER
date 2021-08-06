@@ -1,19 +1,19 @@
-FROM nhsdigitalmait/tkw-x:fd0494d
+FROM nhsdigitalmait/tkw-x:350ecba
 RUN useradd -rm -u 1003 service
-RUN mkdir /home/service/data/ && chown service:service /home/service/data/
-VOLUME /home/service/data
-VOLUME /home/service/fhir
-VOLUME /home/service/certs
+RUN mkdir /home/service/data/ \
+    && mkdir /home/service/certs/ \
+    && mkdir /home/service/fhir/ \
+    && chown service:service /home/service
 COPY . /home/service/TKW/config/FHIR_VALIDATOR_SERVER
 WORKDIR /home/service/TKW/config/FHIR_VALIDATOR_SERVER
 RUN mkdir /home/service/TKW/config/FHIR_VALIDATOR_SERVER/simulator_saved_messages/
 RUN mkdir /home/service/TKW/config/FHIR_VALIDATOR_SERVER/messages_for_validation/
+RUN mkdir /home/service/TKW/config/FHIR_VALIDATOR_SERVER/transmitter_sent_messages/
+RUN chown service:service -R /home/service
 RUN sh set-all-configurations.sh
-
 ENV trustStore=default
 ENV trustStorePassword=default
 ENV keyStore=default
 ENV keyStorePassword=default
 USER service
 CMD ["bash", "runtkwfhirvalidator.sh"]
-
