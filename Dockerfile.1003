@@ -1,8 +1,9 @@
-FROM nhsdigitalmait/tkw-x:350ecba
+FROM nhsdigitalmait/tkw-x:746cb81
 RUN useradd -rm -u 1003 service
 RUN mkdir /home/service/data/ \
     && mkdir /home/service/certs/ \
     && mkdir /home/service/fhir/ \
+    && mkdir /home/service/access_token/ \
     && chown service:service /home/service
 COPY . /home/service/TKW/config/FHIR_VALIDATOR_SERVER
 WORKDIR /home/service/TKW/config/FHIR_VALIDATOR_SERVER

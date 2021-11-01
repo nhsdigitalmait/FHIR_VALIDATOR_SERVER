@@ -39,11 +39,11 @@ INVALID_ACCEPT http_header accept notmatches ^.*application\/fhir\+(xml|json).*$
 #
 VALIDATESTU3	context_path matches ^.*/STU3/\$validate$
 VALIDATER4		context_path matches ^.*/R4/\$validate$
-VALIDATE		context_path matches ^.*/\$validate$
+#VALIDATE		context_path matches ^.*/\$validate$
 #
 REBUILDSTU3	context_path matches ^.*/STU3/\$rebuild$
 REBUILDR4	context_path matches ^.*/R4/\$rebuild$
-REBUILD	context_path matches ^.*/\$rebuild$
+#REBUILD	context_path matches ^.*/\$rebuild$
 #
 passthrough	Always
 dontpassthrough	Never
