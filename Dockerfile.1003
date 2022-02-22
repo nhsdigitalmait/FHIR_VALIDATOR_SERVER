@@ -1,4 +1,4 @@
-FROM nhsdigitalmait/tkw-x:746cb81
+FROM nhsdigitalmait/tkw-x:2ec9dce
 RUN useradd -rm -u 1003 service
 RUN mkdir /home/service/data/ \
     && mkdir /home/service/certs/ \
