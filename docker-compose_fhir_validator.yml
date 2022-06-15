@@ -3,11 +3,16 @@ services:
     fhir_validator_config:
         network_mode : "host"
         volumes:
-            - '${HOME}/TKW-5.0.5/TKW/config:/home/service/config'
+            # external configuration directory
+            - '${TKWROOT}/config/FHIR_VALIDATOR_SERVER/external_configs:/home/service/TKW/config/FHIR_VALIDATOR_SERVER/external_configs'
+            # data directory
             - '${HOME}/Scratch/data:/home/service/data'
+            # directory for storing evidence
+            - '${TKWROOT}/config/FHIR_VALIDATOR_SERVER/all_evidence:/home/service/TKW/config/FHIR_VALIDATOR_SERVER/all_evidence'
+            # log directory for TKW logs
+            - '${TKWROOT}/config/FHIR_VALIDATOR_SERVER/logs:/home/service/TKW/config/FHIR_VALIDATOR_SERVER/logs'
+            # asset directory for reading npm tars
+            - '${HOME}/Technical_Specialist_Folder/fhir/Assets/npm_tars:/home/service/fhir'
+            # Access token file location for the remote terminology server
             - '${HOME}/Technical_Specialist_Folder/TerminologyServer/TerminologyServerLoginDetails:/home/service/access_token'
-            - '${HOME}/Technical_Specialist_Folder/fhir/Assets/NHSD.Assets.STU3_1.4.0/node_modules/NHSD.Assets.STU3:/home/service/fhir/STU3'
-            - '${HOME}/Technical_Specialist_Folder/fhir/Assets/npm_tars:/home/service/fhir/R4'
-        environment:
-            - terminologyserveraccesstokenlocation=/home/service/access_token/fhir_terminology_server_access_token.txt
-        image: 'nhsdigitalmait/fhir_validator_config:20211101'
+        image: 'nhsdigitalmait/fhir_validator_config:20220615'

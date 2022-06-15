@@ -1,5 +1,10 @@
-FROM nhsdigitalmait/tkw-x:2ec9dce
+FROM nhsdigitalmait/tkw-x:a3450be
 RUN useradd -rm -u 1000 service
+
+ENV TKWROOT=/home/service/TKW
+ENV FHIR_ASSETS_NPMTAR_ROOT=/home/service/fhir
+ENV TERMINOLOGY_SERVER_ACCESS_TOKEN_ROOT=/home/service/access_token
+
 RUN mkdir /home/service/data/ \
     && mkdir /home/service/certs/ \
     && mkdir /home/service/fhir/ \

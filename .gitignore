@@ -6,5 +6,6 @@
 /tranmitter_sent_messages/**
 /transmitter_source/**
 /validator_reports/**
+/validatorMessages/**
 push_fhir_validator_to_dockerhub.sh
 setremote.sh

@@ -1,0 +1,10 @@
+version: '2.0'
+services:
+    fhir_validator_config:
+        ports:
+            - '4848:4848'
+        volumes:
+            - '${HOME}/TKW-5.0.5/TKW/config/external_configs:/home/service/config'
+            - '${HOME}/Scratch/data:/home/service/data'
+            - '${HOME}/Technical_Specialist_Folder/fhir/Assets/npm_tars:/home/service/fhir/R4'
+        image: 'nhsdigitalmait/fhir_validator_config:20220222'
